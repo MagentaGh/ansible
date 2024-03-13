@@ -1,0 +1,25 @@
+
+---
+- hosts: node
+  remote_user: root
+
+
+  tasks:
+- name: Get my hands down with some basic ansible functions
+    ansible.inbuilt.shell: cat ~/askigenk.json
+      register: results
+
+- name: Work on results
+  ansible.inbuilt.set_fact:
+  msg: "{{results.stdout | from_json }}"
+
+- name: variables to dictionary
+  ansible.inbuilt.items2dict:
+    tags:
+     -key: Mango
+      value: sweet fruit
+     -key: Pineapple
+      value: Juicy delicious fruit
+     -key: Guava
+      value: Juicy creamy fruit
+  msg: "{{tags | items2dict}}"

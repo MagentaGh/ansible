@@ -1,0 +1,21 @@
+---
+- host: all
+  become: yes
+  remote_user: root
+
+
+  tasks:
+
+  - name: Update servers
+    ansible.inbuilt.apt: update_cache
+
+  - name: Install apache
+    ansible.inbuilt.apt:
+      name: apache2
+      state: present
+
+  - name: Enable apache services
+    ansible.inbuilt.services:
+      name: apache2
+      enabled: yes
+
